@@ -9,7 +9,7 @@ body {
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
   color: #fff;
-  background: #111;
+  background: #C9A343; /* fundo dourado */
 }
 
 /* Header */
@@ -17,8 +17,7 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(8px);
+  background: #C9A343;
   z-index: 1000;
 }
 
@@ -29,14 +28,8 @@ header .container {
   padding: 1rem 2rem;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #fff;
-}
-
-.logo span {
-  color: #e63946;
+.logo img {
+  height: 50px;
 }
 
 .nav-links {
@@ -47,12 +40,13 @@ header .container {
 
 .nav-links a {
   text-decoration: none;
-  color: #fff;
+  color: #000;
+  font-weight: 600;
   transition: color 0.3s;
 }
 
 .nav-links a:hover {
-  color: #e63946;
+  color: #fff;
 }
 
 /* Hero */
@@ -69,24 +63,28 @@ header .container {
 .hero-content h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
+  color: #000;
 }
 
 .hero-content p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
+  color: #222;
 }
 
 .btn {
-  background: #e63946;
-  color: #fff;
+  background: #000;
+  color: #C9A343;
   padding: 0.8rem 1.5rem;
   border-radius: 50px;
   text-decoration: none;
   transition: background 0.3s;
+  font-weight: bold;
 }
 
 .btn:hover {
-  background: #c81d25;
+  background: #fff;
+  color: #000;
 }
 
 /* Seções */
@@ -98,6 +96,7 @@ section {
 h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
+  color: #000;
 }
 
 .grid {
@@ -107,7 +106,8 @@ h2 {
 }
 
 .card {
-  background: #222;
+  background: #000;
+  color: #fff;
   padding: 2rem;
   border-radius: 12px;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -116,12 +116,6 @@ h2 {
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-}
-
-/* Galeria */
-.card.img {
-  background: #333;
-  height: 200px;
 }
 
 /* Formulário */
@@ -141,19 +135,20 @@ form input, form button {
 }
 
 form input {
-  background: #222;
-  color: #fff;
+  background: #fff;
+  color: #000;
 }
 
 form button {
-  background: #e63946;
-  color: #fff;
+  background: #000;
+  color: #C9A343;
   cursor: pointer;
   transition: background 0.3s;
 }
 
 form button:hover {
-  background: #c81d25;
+  background: #fff;
+  color: #000;
 }
 
 /* Footer */
@@ -162,6 +157,7 @@ footer {
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
+  color: #C9A343;
 }
 
 /* Animações */
