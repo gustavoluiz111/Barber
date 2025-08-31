@@ -5,99 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Neto Style</title>
   <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: url('https://images.unsplash.com/photo-1517832606294-07a0f6f4c69f?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
-      color: #fff;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
+    body { height:100vh; display:flex; justify-content:center; align-items:center; background: url('https://images.unsplash.com/photo-1517832606294-07a0f6f4c69f?auto=format&fit=crop&w=1400&q=80') no-repeat center/cover; color:#fff; }
 
     .login-section {
       background: rgba(0,0,0,0.7);
-      padding: 3rem;
-      border-radius: 15px;
-      width: 350px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      padding: 3rem; border-radius: 15px;
+      width: 350px; text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,0.5);
       transition: all 0.3s;
     }
 
-    .login-section h2 {
-      margin-bottom: 1.5rem;
-      color: #C9A343;
-      font-size: 1.8rem;
-    }
+    .login-section h2 { margin-bottom:1.5rem; color:#C9A343; font-size:1.8rem; }
+    .login-section input { width:100%; padding:0.8rem; margin-bottom:1rem; border-radius:8px; border:none; outline:none; font-size:1rem; background:#222; color:#fff; }
+    .login-section .btn { background:#C9A343; color:#000; font-weight:bold; padding:0.8rem; border:none; border-radius:50px; cursor:pointer; width:100%; transition: background 0.3s, transform 0.2s; margin-bottom:0.8rem; }
+    .login-section .btn:hover { background:#fff; color:#000; transform:translateY(-2px); }
+    .login-section p { margin:0.8rem 0 0; font-size:0.9rem; }
+    .login-section a { color:#C9A343; text-decoration:none; font-weight:bold; }
+    .login-section a:hover { text-decoration:underline; }
 
-    .login-section input {
-      width: 100%;
-      padding: 0.8rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      background: #222;
-      color: #fff;
-    }
+    .home-btn { position:absolute; top:20px; left:20px; background:#C9A343; color:#000; padding:0.5rem 1rem; border-radius:50px; text-decoration:none; font-weight:bold; transition: 0.3s; }
+    .home-btn:hover { background:#fff; color:#000; }
 
-    .login-section .btn {
-      background: #C9A343;
-      color: #000;
-      font-weight: bold;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.3s, transform 0.2s;
-      margin-bottom: 0.8rem;
-    }
-
-    .login-section .btn:hover {
-      background: #fff;
-      color: #000;
-      transform: translateY(-2px);
-    }
-
-    .login-section p {
-      margin: 0.8rem 0 0;
-      font-size: 0.9rem;
-    }
-
-    .login-section a {
-      color: #C9A343;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .login-section a:hover {
-      text-decoration: underline;
-    }
-
-    @media(max-width:400px){
-      .login-section{
-        width: 90%;
-        padding: 2rem;
-      }
-    }
+    @media(max-width:400px){ .login-section{ width:90%; padding:2rem; } }
   </style>
 </head>
 <body>
 
+  <a href="index.html" class="home-btn">Home</a>
+
   <section class="login-section fade-in">
     <h2>Login / Cadastro</h2>
 
-    <!-- Login usuário normal -->
     <form id="form-login">
       <input type="email" id="email" placeholder="E-mail" required>
       <input type="password" id="senha" placeholder="Senha" required>
@@ -105,8 +44,7 @@
     </form>
 
     <p>Ou entre como convidado:</p>
-    
-    <!-- Login como convidado -->
+
     <form id="form-convidado">
       <input type="text" id="convidado" placeholder="Digite seu nome" required>
       <button type="submit" class="btn">Entrar como convidado</button>
@@ -116,38 +54,38 @@
   </section>
 
   <script>
-    // Login usuário normal
+    function loginUsuario({ email, senha, convidado }) {
+      if(convidado){
+        localStorage.setItem("usuario", convidado);
+        localStorage.setItem("tipo", "convidado");
+        window.location.href = "dashboard.html";
+        return;
+      }
+
+      const usuarios = [
+        { email:"usuario@teste.com", senha:"123456", tipo:"usuario" },
+        { email:"admin@teste.com", senha:"admin123", tipo:"profissional" }
+      ];
+
+      const user = usuarios.find(u => u.email === email && u.senha === senha);
+      if(!user){ alert("Usuário ou senha incorretos!"); return; }
+
+      localStorage.setItem("usuario", user.email);
+      localStorage.setItem("tipo", user.tipo);
+
+      if(user.tipo==="usuario") window.location.href = "dashboard.html";
+      else if(user.tipo==="profissional") window.location.href = "admin.html";
+    }
+
     document.getElementById("form-login").addEventListener("submit", function(e){
       e.preventDefault();
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
-
-      if(!email.includes("@")){
-        alert("Digite um e-mail válido");
-        return;
-      }
-      if(senha.length < 6){
-        alert("Senha deve ter no mínimo 6 caracteres");
-        return;
-      }
-
-      localStorage.setItem("usuario", email);
-      window.location.href = "dashboard.html";
+      loginUsuario({ email: document.getElementById("email").value, senha: document.getElementById("senha").value });
     });
 
-    // Login como convidado
     document.getElementById("form-convidado").addEventListener("submit", function(e){
       e.preventDefault();
-      const convidado = document.getElementById("convidado").value.trim();
-      if(convidado.length < 1){
-        alert("Digite seu nome");
-        return;
-      }
-
-      localStorage.setItem("usuario", convidado);
-      window.location.href = "dashboard.html";
+      loginUsuario({ convidado: document.getElementById("convidado").value.trim() });
     });
   </script>
-
 </body>
 </html>
