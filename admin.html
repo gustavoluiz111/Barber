@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Neto Style</title>
+  <style>
+    body { font-family:'Inter', sans-serif; background:#111; color:#fff; min-height:100vh; margin:0; }
+    .container { padding:2rem; max-width:900px; margin:auto; }
+    h1 { color:#C9A343; margin-bottom:1rem; }
+    .card { background:#222; padding:1.5rem; border-radius:12px; margin-bottom:1rem; }
+    .btn { background:#C9A343; color:#000; font-weight:bold; padding:0.8rem 1.5rem; border:none; border-radius:50px; cursor:pointer; text-decoration:none; transition:0.3s; }
+    .btn:hover { background:#fff; color:#000; }
+    .home-btn { position:absolute; top:20px; left:20px; background:#C9A343; color:#000; padding:0.5rem 1rem; border-radius:50px; text-decoration:none; font-weight:bold; transition:0.3s; }
+    .home-btn:hover { background:#fff; color:#000; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="home-btn">Home</a>
+  <div class="container">
+    <h1>Bem-vindo(a), <span id="usuarioNome"></span>!</h1>
+    <div class="card">Gerenciar agendamentos dos clientes.</div>
+    <div class="card">Atualizar serviços e preços.</div>
+    <div class="card">Visualizar relatórios de atendimento.</div>
+  </div>
+
+  <script>
+    const usuario = localStorage.getItem("usuario") || "Profissional";
+    document.getElementById("usuarioNome").innerText = usuario;
+  </script>
+</body>
+</html>
