@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Neto Style</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Seção login */
+    .login-section {
+      background: rgba(0,0,0,0.7); /* semi-transparente para não cobrir totalmente o fundo */
+      padding: 3rem;
+      border-radius: 15px;
+      color: #fff;
+      width: 350px;
+      text-align: center;
+      margin: auto;
+      margin-top: 5%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .login-section h2 {
+      margin-bottom: 1.5rem;
+      color: #C9A343; /* dourado do site */
+    }
+
+    .login-section input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: #222; /* segue paleta do site */
+      color: #fff;
+    }
+
+    .login-section .btn {
+      background: #C9A343; /* dourado */
+      color: #000;
+      font-weight: bold;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s;
+    }
+
+    .login-section .btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .login-section p {
+      margin: 1rem 0 0;
+      font-size: 0.9rem;
+    }
+
+    .login-section a {
+      color: #C9A343;
+      text-decoration: none;
+    }
+
+    .login-section a:hover {
+      text-decoration: underline;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1517832606294-07a0f6f4c69f?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      margin: 0;
+    }
+
+    @media(max-width:400px){
+      .login-section{
+        width: 90%;
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="login-section fade-in">
+    <h2>Login / Cadastro</h2>
+
+    <!-- Login usuário normal -->
+    <form id="form-login">
+      <input type="email" id="email" placeholder="E-mail" required>
+      <input type="password" id="senha" placeholder="Senha" required>
+      <button type="submit" class="btn">Entrar</button>
+    </form>
+
+    <p>Ou entre como convidado:</p>
+    
+    <!-- Login como convidado -->
+    <form id="form-convidado">
+      <input type="text" id="convidado" placeholder="Digite seu nome" required>
+      <button type="submit" class="btn">Entrar como convidado</button>
+    </form>
+
+    <p>Se você é profissional, <a href="admin.html">clique aqui</a> para login</p>
+  </section>
+
+  <script>
+    // Login usuário normal
+    document.getElementById("form-login").addEventListener("submit", function(e){
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+
+      if(!email.includes("@")){
+        alert("Digite um e-mail válido");
+        return;
+      }
+      if(senha.length < 6){
+        alert("Senha deve ter no mínimo 6 caracteres");
+        return;
+      }
+
+      localStorage.setItem("usuario", email);
+      window.location.href = "dashboard.html";
+    });
+
+    // Login como convidado
+    document.getElementById("form-convidado").addEventListener("submit", function(e){
+      e.preventDefault();
+      const convidado = document.getElementById("convidado").value.trim();
+      if(convidado.length < 1){
+        alert("Digite seu nome");
+        return;
+      }
+
+      localStorage.setItem("usuario", convidado);
+      window.location.href = "dashboard.html";
+    });
+  </script>
+
+</body>
+</html>
